@@ -3,6 +3,7 @@ package api.simplified.loans.controller;
 import api.simplified.loans.dto.CustomerLoanRequest;
 import api.simplified.loans.dto.CustomerLoanResponse;
 import api.simplified.loans.service.LoanService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,7 @@ public class LoanController {
     }
 
     @PostMapping(value = "/customer-loans")
-    public ResponseEntity<CustomerLoanResponse> customerLoans(@RequestBody CustomerLoanRequest loanRequest) {
+    public ResponseEntity<CustomerLoanResponse> customerLoans(@RequestBody @Valid CustomerLoanRequest loanRequest) {
       var loanResponse = loanService.checkLoanAvailability(loanRequest);
 
       return ResponseEntity.ok(loanResponse);
